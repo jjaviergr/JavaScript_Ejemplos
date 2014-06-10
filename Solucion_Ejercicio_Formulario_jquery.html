@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"> 
+
+<head> 
+	<title> Formulario </title> 
+	<!--Juego de caracteres usado: utf8 (es en el que ha sido grabado esta página) --> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+   <script src="plugins/jquery.js"></script>
+   <script src="plugins/jquery.-1.9.1.js"></script>
+   <script src="plugins/jquery.validate.js"></script>
+   
+   <script>
+$.validator.setDefaults({
+	submitHandler: function() { alert("submitted!"); }
+});
+
+$().ready(function() {
+	// validate the comment form when it is submitted
+	$("#commentForm").validate();
+
+	// validate signup form on keyup and submit
+	$("#signupForm").validate({
+		rules: {
+			firstname: "required",
+			lastname: "required",
+			username: {
+				required: true,
+				minlength: 2
+			},
+			password: {
+				required: true,
+				minlength: 5
+			},
+			confirm_password: {
+				required: true,
+				minlength: 5,
+				equalTo: "#password"
+			},
+			email: {
+				required: true,
+				email: true
+			},
+			topic: {
+				required: "#newsletter:checked",
+				minlength: 2
+			},
+			agree: "required"
+		},
+		messages: {
+			firstname: "Please enter your firstname",
+			lastname: "Please enter your lastname",
+			username: {
+				required: "Please enter a username",
+				minlength: "Your username must consist of at least 2 characters"
+			},
+			password: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 5 characters long"
+			},
+			confirm_password: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 5 characters long",
+				equalTo: "Please enter the same password as above"
+			},
+			email: "Please enter a valid email address",
+			agree: "Please accept our policy"
+		}
+	});
+
+	// propose username by combining first- and lastname
+	$("#username").focus(function() {
+		var firstname = $("#firstname").val();
+		var lastname = $("#lastname").val();
+		if(firstname && lastname && !this.value) {
+			this.value = firstname + "." + lastname;
+		}
+	});
+
+	//code to hide topic selection, disable for demo
+	var newsletter = $("#newsletter");
+	// newsletter topics are optional, hide at first
+	var inital = newsletter.is(":checked");
+	var topics = $("#newsletter_topics")[inital ? "removeClass" : "addClass"]("gray");
+	var topicInputs = topics.find("input").attr("disabled", !inital);
+	// show when newsletter is checked
+	newsletter.click(function() {
+		topics[this.checked ? "removeClass" : "addClass"]("gray");
+		topicInputs.attr("disabled", !this.checked);
+	});
+});
+</script>
+
+     
+        
+</head>
+
+<body>
+	<h2 align="center"> Ejemplo de Formulario </h2>
+	<div id="main">
+	<!-- ============ FORMULARIO ============ -->
+	<form class="cmxform" id="commentForm" name="correo" method="post" enctype="text/plain" action="mailto:fbalsalobre@iesalandalus.org?subject=Pruebas de formularios"> 
+	
+	<!-- == Tipos de Campos del formulario == -->
+	
+	<!-- Campos de texto en una línea -->
+	<p> Apellidos: 
+		<input id="cname" name="name" minlength="2" type="text" required>	
+	</p>
+	
+	<!-- Campos de texto de varias líneas -->
+	<p> Sugerencias:</p>
+	<textarea name="sugerencias" cols="20" rows ="5"> </textarea>
+	<!-- Ojo!!! así no va:
+	<textarea name="sugerencias" cols="20" rows ="5"/>
+	-->
+	
+	<!-- Botones de opción -->
+	<p> Horario preferido entrevista: </p>
+		<input type="radio" name="horario" value="mañana" /> Mañana	
+		<input type="radio" name="horario" value="tarde" checked="checked"/> Tarde	
+	
+	<!-- Casillas de verificación -->	
+	<p> Aficiones:</p>
+	<input type="checkbox" name="teatro" value="x"/> Teatro
+	<input type="checkbox" name="cine" value="x"/> Cine
+	<input type="checkbox" name="lectura" value="x"/>Lectura
+	
+	<!-- Cuadro de menú -->
+	<p> Continente: 
+	<select name="selecciones" size="3">
+		<option value="" selected="selected">- selecciona -</option>
+		<option>África</option> 
+		<option>América</option> 
+		<option>Asia</option> 
+		<option>Europa</option> 
+		<option>Oceanía</option>
+	</select>		
+	</p>
+	
+	<br/> <br/>		
+
+	<!-- Botones de acción -->
+	<input class="submit" type="submit" name="submit" value="Enviar">	
+	<input type="reset" name="reset" value="Borrar datos">
+	
+	</form>
+        </div>
+</body>
+</html>

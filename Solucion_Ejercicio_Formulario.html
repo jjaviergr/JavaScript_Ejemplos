@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"> 
+
+<head> 
+	<title> Formulario </title> 
+	<!--Juego de caracteres usado: utf8 (es en el que ha sido grabado esta página) --> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        
+        
+</head>
+
+<body>
+	<h2 align="center"> Ejemplo de Formulario </h2>
+	
+	<!-- ============ FORMULARIO ============ -->
+	<form name="correo" method="post" enctype="text/plain" action="mailto:fbalsalobre@iesalandalus.org?subject=Pruebas de formularios"> 
+	
+	<!-- == Tipos de Campos del formulario == -->
+	
+	<!-- Campos de texto en una línea -->
+	<p> Apellidos: 
+		<input type="text" name="nombre" size="30" maxlength="25"/>	
+	</p>
+	
+	<!-- Campos de texto de varias líneas -->
+	<p> Sugerencias:</p>
+	<textarea name="sugerencias" cols="20" rows ="5"> </textarea>
+	<!-- Ojo!!! así no va:
+	<textarea name="sugerencias" cols="20" rows ="5"/>
+	-->
+	
+	<!-- Botones de opción -->
+	<p> Horario preferido entrevista: </p>
+		<input type="radio" name="horario" value="mañana" /> Mañana	
+		<input type="radio" name="horario" value="tarde" checked="checked"/> Tarde	
+	
+	<!-- Casillas de verificación -->	
+	<p> Aficiones:</p>
+	<input type="checkbox" name="teatro" value="x"/> Teatro
+	<input type="checkbox" name="cine" value="x"/> Cine
+	<input type="checkbox" name="lectura" value="x"/>Lectura
+	
+	<!-- Cuadro de menú -->
+	<p> Continente: 
+	<select name="selecciones" size="3">
+		<option value="" selected="selected">- selecciona -</option>
+		<option>África</option> 
+		<option>América</option> 
+		<option>Asia</option> 
+		<option>Europa</option> 
+		<option>Oceanía</option>
+	</select>		
+	</p>
+	
+	<br/> <br/>		
+
+	<!-- Botones de acción -->
+	<input type="submit" name="submit" value="Enviar">	
+	<input type="reset" name="reset" value="Borrar datos">
+	
+	</form>
+	
+</body>
+</html>
